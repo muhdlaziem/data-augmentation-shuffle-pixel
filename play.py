@@ -2,7 +2,7 @@ import os
 import cv2
 from main import *
 import sys
-
+import argparse
 ROOT_DIR = os.path.abspath(os.curdir)
 
 def generateImagePermutation(perm_no=3 , path=".", proj="Project", seed=None):
@@ -32,4 +32,11 @@ def generateImagePermutation(perm_no=3 , path=".", proj="Project", seed=None):
 
 if __name__ == "__main__":
     # print(sys.argv[1], sys.argv[2])
-    generateImagePermutation(perm_no = int(sys.argv[1]), path=sys.argv[2],proj=sys.argv[3], seed=sys.argv[4])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--permno", help="amount of permutated image in one image",type=int)
+    parser.add_argument("--path", help="Path of folder contains images",type=str)
+    parser.add_argument("--proj", help="Project Name",type=str)
+    parser.add_argument("--seed", help="Random seed",type=int)
+    args = parser.parse_args()
+    
+    generateImagePermutation(perm_no = args.permno, path=args.path,proj=args.proj, seed=args.seed)
